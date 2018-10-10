@@ -1,3 +1,14 @@
+#compose-button {
+  float: right;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  color: #00a087;
+  font-size: 1.2em;
+  background-color: #d1f3ee;
+  margin-top: 8px;
+}
+
 .float-fix {
   overflow: auto;
 }
@@ -57,4 +68,10 @@
 
 .tweet:hover > footer .select-icons {
   opacity: 1;
+}
+
+#compose-button:hover {
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
 }

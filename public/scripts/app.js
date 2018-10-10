@@ -50,8 +50,11 @@ $(() => {
     })
   }
 
+  //Initial call to load up existing tweets
   loadTweets()
 
+
+  //Function for submitting and displaying new tweet
   $('.new-tweet form').on('submit', function(event) {
     event.preventDefault()
 
@@ -63,15 +66,22 @@ $(() => {
     } else if (textAreaValue.length > 140) {
       alert('You are humming too much at once!')
     } else {
+      //For the below, I didn't like the fact that .empty() would cause a quick flash even though
+      //the page didn't refresh. I decided to do the below in order for it to look more seamless.
+      //I imagine it would not work if order of the tweets change, in which case I would have gone with a different approach.
       $.ajax('/tweets', { method: 'POST', data }).then(() => {
         $.ajax('/tweets').then((arr) => {
           $('#tweets-container').prepend(createTweetElement(arr[arr.length - 1]))
         })
-
-      // $('#tweets-container').empty()
-      // loadTweets()
       })
     }
   })
+
+  $('#compose-button').on('click', (event) => {
+    $('.new-tweet').slideToggle(400, function() {
+      $('.new-tweet form textarea').focus()
+    })
+  })
+
 
 }) // End of document ready
