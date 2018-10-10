@@ -53,30 +53,31 @@ const data = [
 
 
 const createTweetElement = (tweetObj) => {
-  const tweet = $('<article>').addClass('tweet');
-  let tweetDate = tweetObj.created_at
-  let currentDate = new Date().getTime()
-  const secondsInDay = 24 * 60 * 60 * 1000
+  const tweetDate = tweetObj.created_at
+  const currentDate = new Date().getTime()
+  const secondsInDay = 86400000
+  const daysAgo = Math.floor((currentDate - tweetDate) / secondsInDay)
 
-  const header = $('<header>');
-  const floatFix = $('<div>').addClass('float-fix').html("<img src=" + tweetObj.user.avatars.small + ">");
-  const name = $('<h1>').text(tweetObj.user.name);
-  const userHandle = $('<div>').addClass('user-handle').text(tweetObj.user.handle)
-  const tweetContent = $('<section>').text(tweetObj.content.text)
-  const footer = $('<footer>')
-  const date = $('<span>').addClass('date-track').text(Math.floor((currentDate - tweetDate) / secondsInDay) + " days ago")
-  const icons = $('<span>').addClass('select-icons').text('icons')
+  const $tweet = $('<article>').addClass('tweet')
+  const $header = $('<header>')
+  const $floatFix = $('<div>').addClass('float-fix').html(`<img src="${tweetObj.user.avatars.small}">`)
+  const $name = $('<h1>').text(tweetObj.user.name)
+  const $userHandle = $('<div>').addClass('user-handle').text(tweetObj.user.handle)
+  const $tweetContent = $('<section>').text(tweetObj.content.text)
+  const $footer = $('<footer>')
+  const $date = $('<span>').addClass('date-track').text(`${daysAgo} days ago`)
+  const $icons = $('<span>').addClass('select-icons').text('icons')
 
-  tweet.append(header)
-  header.append(floatFix)
-  floatFix.append(name)
-  floatFix.append(userHandle)
-  tweet.append(tweetContent)
-  tweet.append(footer)
-  footer.append(date)
-  footer.append(icons)
+  $tweet.append($header)
+  $header.append($floatFix)
+  $floatFix.append($name)
+  $floatFix.append($userHandle)
+  $tweet.append($tweetContent)
+  $tweet.append($footer)
+  $footer.append($date)
+  $footer.append($icons)
 
-  return tweet
+  return $tweet
 }
 
 const renderTweets = (arr) => {
