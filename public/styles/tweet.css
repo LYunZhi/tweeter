@@ -1,0 +1,59 @@
+.float-fix {
+  overflow: auto;
+}
+
+.tweet  {
+  border: 1px solid #a9a9a9;
+  margin: 20px 0;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+
+.tweet header, .tweet footer {
+  padding: 10px;
+}
+
+.tweet header {
+  background-color: #f8f8f8;
+  border-radius: 5px;
+}
+
+.tweet header img {
+  width: 50px;
+  float: left;
+}
+
+.tweet h1 {
+  float: left;
+  margin: 0px 10px;
+}
+
+.tweet section {
+  border-bottom: 1px solid #f8f8f8;
+  padding: 30px 10px;
+}
+
+.tweet footer {
+  font-size: 0.8em;
+}
+
+.tweet .user-handle {
+  float: right;
+}
+
+.tweet footer .select-icons {
+  float: right;
+  opacity: 0;
+}
+
+.tweet:hover {
+  opacity: 1;
+}
+
+.tweet-dim {
+  opacity: 0.5;
+}
+
+.tweet-lightup {
+  opacity: 1;
+}
