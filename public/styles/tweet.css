@@ -31,6 +31,7 @@
 .tweet section {
   border-bottom: 1px solid #f8f8f8;
   padding: 30px 10px;
+  overflow-wrap: break-word;
 }
 
 .tweet footer {
