@@ -57,32 +57,36 @@ const createTweetElement = (tweetObj) => {
   const currentDate = new Date().getTime()
   const secondsInDay = 86400000
   const daysAgo = Math.floor((currentDate - tweetDate) / secondsInDay)
+  const image = `<img src="${tweetObj.user.avatars.small}">`
 
   const $tweet = $('<article>').addClass('tweet')
+
+  // Header structure
   const $header = $('<header>')
-  const $floatFix = $('<div>').addClass('float-fix').html(`<img src="${tweetObj.user.avatars.small}">`)
+  const $floatFix = $('<div>').addClass('float-fix')
   const $name = $('<h1>').text(tweetObj.user.name)
   const $userHandle = $('<div>').addClass('user-handle').text(tweetObj.user.handle)
+
+  //Tweet content structure
   const $tweetContent = $('<section>').text(tweetObj.content.text)
+
+  //Footer structure
   const $footer = $('<footer>')
   const $date = $('<span>').addClass('date-track').text(`${daysAgo} days ago`)
   const $icons = $('<span>').addClass('select-icons').text('icons')
 
-  $tweet.append($header)
+
+  $tweet.append($header, $tweetContent, $footer)
   $header.append($floatFix)
-  $floatFix.append($name)
-  $floatFix.append($userHandle)
-  $tweet.append($tweetContent)
-  $tweet.append($footer)
-  $footer.append($date)
-  $footer.append($icons)
+  $floatFix.append(image, $name, $userHandle)
+  $footer.append($date, $icons)
 
   return $tweet
 }
 
 const renderTweets = (arr) => {
-  arr.forEach(function(obj) {
-    $('#tweets-container').append(createTweetElement(obj))
+  arr.forEach(function(tweet) {
+    $('#tweets-container').append(createTweetElement(tweet))
   })
 }
 
