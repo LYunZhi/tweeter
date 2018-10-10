@@ -58,8 +58,6 @@ const createTweetElement = (tweetObj) => {
   let currentDate = new Date().getTime()
   const secondsInDay = 24 * 60 * 60 * 1000
 
-  console.log(secondsInDay)
-
   const header = $('<header>');
   const floatFix = $('<div>').addClass('float-fix').html("<img src=" + tweetObj.user.avatars.small + ">");
   const name = $('<h1>').text(tweetObj.user.name);
