@@ -55,8 +55,10 @@ const data = [
 const createTweetElement = (tweetObj) => {
   const tweet = $('<article>').addClass('tweet');
   let tweetDate = tweetObj.created_at
-  let currentDate = new Date()
+  let currentDate = new Date().getTime()
   const secondsInDay = 24 * 60 * 60 * 1000
+
+  console.log(secondsInDay)
 
   const header = $('<header>');
   const floatFix = $('<div>').addClass('float-fix').html("<img src=" + tweetObj.user.avatars.small + ">");
@@ -64,7 +66,7 @@ const createTweetElement = (tweetObj) => {
   const userHandle = $('<div>').addClass('user-handle').text(tweetObj.user.handle)
   const tweetContent = $('<section>').text(tweetObj.content.text)
   const footer = $('<footer>')
-  const date = $('<span>').addClass('date-track').text((currentDate - tweetDate))
+  const date = $('<span>').addClass('date-track').text(Math.floor((currentDate - tweetDate) / secondsInDay) + " days ago")
   const icons = $('<span>').addClass('select-icons').text('icons')
 
   tweet.append(header)
