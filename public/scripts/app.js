@@ -4,34 +4,68 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const tweetData = {
-  "user": {
-    "name": "Newton",
-    "avatars": {
-      "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-      "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-      "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
+const data = [
+  {
+    "user": {
+      "name": "Newton",
+      "avatars": {
+        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
+        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
+        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
+      },
+      "handle": "@SirIsaac"
     },
-    "handle": "@SirIsaac"
+    "content": {
+      "text": "If I have seen further it is by standing on the shoulders of giants"
+    },
+    "created_at": 1461116232227
   },
-  "content": {
-    "text": "If I have seen further it is by standing on the shoulders of giants"
+  {
+    "user": {
+      "name": "Descartes",
+      "avatars": {
+        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
+        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
+        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
+      },
+      "handle": "@rd" },
+    "content": {
+      "text": "Je pense , donc je suis"
+    },
+    "created_at": 1461113959088
   },
-  "created_at": 1461116232227
-}
+  {
+    "user": {
+      "name": "Johann von Goethe",
+      "avatars": {
+        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
+        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
+        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
+      },
+      "handle": "@johann49"
+    },
+    "content": {
+      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
+    },
+    "created_at": 1461113796368
+  }
+];
+
 
 const createTweetElement = (tweetObj) => {
-  const tweet = $('<article>').addClass('tweet')
-  let convertDate = new Date(tweetObj.created_at)
+  const tweet = $('<article>').addClass('tweet');
+  let tweetDate = tweetObj.created_at
+  let currentDate = new Date()
+  const secondsInDay = 24 * 60 * 60 * 1000
 
-  const header = $('<header>')
-  const floatFix = $('<div>').addClass('float-fix').html("<img src=" + tweetObj.user.avatars.small + ">")
-  const name = $('<h1>').text(tweetObj.user.name)
+  const header = $('<header>');
+  const floatFix = $('<div>').addClass('float-fix').html("<img src=" + tweetObj.user.avatars.small + ">");
+  const name = $('<h1>').text(tweetObj.user.name);
   const userHandle = $('<div>').addClass('user-handle').text(tweetObj.user.handle)
   const tweetContent = $('<section>').text(tweetObj.content.text)
   const footer = $('<footer>')
-  const date = $('<span>').addClass('date-track').text(tweetObj.created_at)
-  const icons = $('<span>').addClass('select-icons').text('hi')
+  const date = $('<span>').addClass('date-track').text((currentDate - tweetDate))
+  const icons = $('<span>').addClass('select-icons').text('icons')
 
   tweet.append(header)
   header.append(floatFix)
@@ -39,14 +73,16 @@ const createTweetElement = (tweetObj) => {
   floatFix.append(userHandle)
   tweet.append(tweetContent)
   tweet.append(footer)
-  date.appendTo(footer)
-  icons.appendTo(footer)
+  footer.append(date)
+  footer.append(icons)
 
   return tweet
 }
 
-const $tweet = createTweetElement(tweetData);
+const renderTweets = (arr) => {
+  arr.forEach(function(obj) {
+    $('#tweets-container').append(createTweetElement(obj))
+  })
+}
 
-// Test / driver code (temporary)
-console.log($tweet); // to see what it looks like
-$('#tweets-container').append($tweet); // to add it to the page so we can make su
+renderTweets(data)
