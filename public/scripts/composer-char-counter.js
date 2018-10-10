@@ -13,12 +13,4 @@ $(document).ready(function() {
     }
   })
 
-  // $('#tweet-container article').on('mouseout', function(event) {
-  //   $('.tweet').removeClass('tweet-lightup')
-  //   $('.tweet').addClass('tweet-dim')
-  // })
-
-  // $('#tweet-container article').on('mouseover', function(event) {
-  //   $('.tweet').addClass('tweet-lightup')
-  // })
 }) // End of document ready
