@@ -49,6 +49,7 @@ $(() => {
   const loadTweets = () => {
     $.ajax('/tweets').then((arr) => {
       renderTweets(arr)
+
     })
   }
 
@@ -67,20 +68,15 @@ $(() => {
     const textAreaValue = $(this).find('textarea').val()
     const data = $(this).serialize()
 
+
+    errorMessage.slideUp().text("");
+
     if (textAreaValue === '') {
-      if (errorMessage) {
-        errorMessage.slideUp()
-      }
       errorMessage.slideDown().text('You must hum about something!')
     } else if (textAreaValue.length > 140) {
-      if (errorMessage) {
-        errorMessage.slideUp()
-      }
       errorMessage.slideDown().text('You are humming about too much!')
     } else {
-      if (errorMessage) {
-        errorMessage.slideUp()
-      }
+
       //For the below, I didn't like the fact that .empty() would cause a quick flash even though
       //the page didn't refresh. I decided to do the below in order for it to look more seamless.
       //I imagine it would not work if order of the tweets change, in which case I would have gone with a different approach.
@@ -89,6 +85,10 @@ $(() => {
           $('#tweets-container').prepend(createTweetElement(arr[arr.length - 1]))
         })
       })
+
+      //Reset textarea and counter after submission
+      $(this).find('textarea').val('')
+      $(this).find('span').text(140)
     }
   })
 
