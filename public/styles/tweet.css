@@ -1,3 +1,12 @@
+.error-value {
+  margin: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: #f98888;
+  color: #fff;
+  padding: 5px;
+}
+
 #compose-button {
   float: right;
   padding: 20px;

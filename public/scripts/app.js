@@ -6,23 +6,24 @@
 
 $(() => {
 
-  const createTweetElement = (tweetObj) => {
-    const tweetDate = tweetObj.created_at
+  const createTweetElement = ({user: {avatars, handle, name}, content: {text}, created_at}) => {
+
+    const tweetDate = created_at
     const currentDate = new Date().getTime()
     const secondsInDay = 86400000
     const daysAgo = Math.floor((currentDate - tweetDate) / secondsInDay)
-    const image = `<img src="${tweetObj.user.avatars.small}">`
+    const image = `<img src="${avatars.small}">`
 
     const $tweet = $('<article>').addClass('tweet')
 
     // Header structure
     const $header = $('<header>')
     const $floatFix = $('<div>').addClass('float-fix')
-    const $name = $('<h1>').text(tweetObj.user.name)
-    const $userHandle = $('<div>').addClass('user-handle').text(tweetObj.user.handle)
+    const $name = $('<h1>').text(name)
+    const $userHandle = $('<div>').addClass('user-handle').text(handle)
 
     //Tweet content structure
-    const $tweetContent = $('<section>').text(tweetObj.content.text)
+    const $tweetContent = $('<section>').text(text)
 
     //Footer structure
     const $footer = $('<footer>')
@@ -39,8 +40,9 @@ $(() => {
   }
 
   const renderTweets = (arr) => {
+    const container = $('#tweets-container')
     arr.forEach(function(tweet) {
-      $('#tweets-container').prepend(createTweetElement(tweet))
+      container.prepend(createTweetElement(tweet))
     })
   }
 
@@ -50,6 +52,9 @@ $(() => {
     })
   }
 
+  //Initially, error message elements are hidden
+  $('.error-value').hide()
+
   //Initial call to load up existing tweets
   loadTweets()
 
@@ -58,14 +63,24 @@ $(() => {
   $('.new-tweet form').on('submit', function(event) {
     event.preventDefault()
 
+    const errorMessage = $('.error-value')
     const textAreaValue = $(this).find('textarea').val()
-    const data = $(event.target).serialize()
+    const data = $(this).serialize()
 
     if (textAreaValue === '') {
-      alert('You must hum about something!')
+      if (errorMessage) {
+        errorMessage.slideUp()
+      }
+      errorMessage.slideDown().text('You must hum about something!')
     } else if (textAreaValue.length > 140) {
-      alert('You are humming too much at once!')
+      if (errorMessage) {
+        errorMessage.slideUp()
+      }
+      errorMessage.slideDown().text('You are humming about too much!')
     } else {
+      if (errorMessage) {
+        errorMessage.slideUp()
+      }
       //For the below, I didn't like the fact that .empty() would cause a quick flash even though
       //the page didn't refresh. I decided to do the below in order for it to look more seamless.
       //I imagine it would not work if order of the tweets change, in which case I would have gone with a different approach.
@@ -79,9 +94,11 @@ $(() => {
 
   $('#compose-button').on('click', (event) => {
     $('.new-tweet').slideToggle(400, function() {
-      $('.new-tweet form textarea').focus()
+      $(this).find('textarea').focus()
     })
   })
+
+
 
 
 }) // End of document ready
