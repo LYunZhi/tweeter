@@ -1,9 +1,3 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
 $(() => {
 
   const createTweetElement = ({user: {avatars, handle, name}, content: {text}, created_at}) => {
@@ -76,10 +70,11 @@ $(() => {
     } else if (textAreaValue.length > 140) {
       errorMessage.slideDown().text('You are humming about too much!')
     } else {
-
       //For the below, I didn't like the fact that .empty() would cause a quick flash even though
       //the page didn't refresh. I decided to do the below in order for it to look more seamless.
-      //I imagine it would not work if order of the tweets change, in which case I would have gone with a different approach.
+      //I imagine it would not work if order of the tweets change, in which case I would have gone
+      //with a different approach. A better way would probably be just emptying the tweet container
+      //in the render tweets function.
       $.ajax('/tweets', { method: 'POST', data }).then(() => {
         $.ajax('/tweets').then((arr) => {
           $('#tweets-container').prepend(createTweetElement(arr[arr.length - 1]))
@@ -98,7 +93,4 @@ $(() => {
     })
   })
 
-
-
-
-}) // End of document ready
+})
