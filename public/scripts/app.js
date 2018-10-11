@@ -34,9 +34,9 @@ $(() => {
   }
 
   const renderTweets = (arr) => {
-    const container = $('#tweets-container')
+    const $container = $('#tweets-container')
     arr.forEach(function(tweet) {
-      container.prepend(createTweetElement(tweet))
+      $container.prepend(createTweetElement(tweet))
     })
   }
 
@@ -58,17 +58,22 @@ $(() => {
   $('.new-tweet form').on('submit', function(event) {
     event.preventDefault()
 
-    const errorMessage = $('.error-value')
-    const textAreaValue = $(this).find('textarea').val()
+    const $errorMessage = $('.error-value')
+    const $textAreaValue = $(this).find('textarea').val()
     const data = $(this).serialize()
 
+    if ($errorMessage.is(':visible')) {
+      $errorMessage.slideUp(100)
+    }
 
-    errorMessage.slideUp().text("");
-
-    if (textAreaValue === '') {
-      errorMessage.slideDown().text('You must hum about something!')
-    } else if (textAreaValue.length > 140) {
-      errorMessage.slideDown().text('You are humming about too much!')
+    if ($textAreaValue === '') {
+      $errorMessage.slideDown(400, () => {
+        $errorMessage.text('You must hum about something!')
+      })
+    } else if ($textAreaValue.length > 140) {
+      $errorMessage.slideDown(400, () => {
+        $errorMessage.text('You are humming about too much!')
+      })
     } else {
       //For the below, I didn't like the fact that .empty() would cause a quick flash even though
       //the page didn't refresh. I decided to do the below in order for it to look more seamless.
