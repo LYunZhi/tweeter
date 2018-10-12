@@ -6,7 +6,8 @@ $(() => {
     const currentDate = moment()
     const daysAgo = tweetDate.from(currentDate)
     const image = `<img src="${avatars.small}">`
-
+// <i class="fas fa-flag"></i>
+    // DOM structure begins here
     const $tweet = $('<article>').addClass('tweet')
 
     // Header structure
@@ -21,13 +22,14 @@ $(() => {
     //Footer structure
     const $footer = $('<footer>')
     const $date = $('<span>').addClass('date-track').text(daysAgo)
-    const $icons = $('<span>').addClass('select-icons').text('icons')
-
+    const $flag = $('<i>').addClass('fas fa-flag select-icons')
+    const $retweet = $('<i>').addClass('fas fa-retweet select-icons')
+    const $heart = $('<i>').addClass('fas fa-heart select-icons')
 
     $tweet.append($header, $tweetContent, $footer)
     $header.append($floatFix)
     $floatFix.append(image, $name, $userHandle)
-    $footer.append($date, $icons)
+    $footer.append($date, $flag, $retweet, $heart)
 
     return $tweet
   }

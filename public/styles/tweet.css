@@ -65,6 +65,8 @@
 .tweet footer .select-icons {
   float: right;
   opacity: 0;
+  color: #00a087;
+  margin: 0 5px;
 }
 
 .tweet:hover {
