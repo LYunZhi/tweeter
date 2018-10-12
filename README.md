@@ -20,4 +20,4 @@ This repository is the starter code for the project: Students will fork and clon
 ## Screenshots
 
 !['Screenshot of main app'](https://github.com/LYunZhi/tweeter/blob/master/docs/tweet-main.png?raw=true)
-!['Screenshot of when error comes up'](https://github.com/LYunZhi/tweeter/blob/master/docs/tweet-main.png?raw=true)
+!['Screenshot of when error comes up'](https://github.com/LYunZhi/tweeter/blob/master/docs/tweet-error.png?raw=true)
