@@ -2,10 +2,9 @@ $(() => {
 
   const createTweetElement = ({user: {avatars, handle, name}, content: {text}, created_at}) => {
 
-    const tweetDate = created_at
-    const currentDate = new Date().getTime()
-    const secondsInDay = 86400000
-    const daysAgo = Math.floor((currentDate - tweetDate) / secondsInDay)
+    const tweetDate = moment(created_at)
+    const currentDate = moment()
+    const daysAgo = tweetDate.from(currentDate)
     const image = `<img src="${avatars.small}">`
 
     const $tweet = $('<article>').addClass('tweet')
@@ -21,7 +20,7 @@ $(() => {
 
     //Footer structure
     const $footer = $('<footer>')
-    const $date = $('<span>').addClass('date-track').text(`${daysAgo} days ago`)
+    const $date = $('<span>').addClass('date-track').text(daysAgo)
     const $icons = $('<span>').addClass('select-icons').text('icons')
 
 
