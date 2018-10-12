@@ -79,6 +79,18 @@
 }
 
 .tweet:hover > footer .select-icons {
+  opacity: 0.5;
+}
+
+.tweet footer .fa-flag:hover {
+  opacity: 1;
+}
+
+.tweet footer .fa-retweet:hover {
+  opacity: 1;
+}
+
+.tweet footer .fa-heart:hover {
   opacity: 1;
 }
 
