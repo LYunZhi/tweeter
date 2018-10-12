@@ -77,14 +77,13 @@ $(() => {
       //the page didn't refresh. I decided to do the below in order for it to look more seamless.
       //I imagine it would not work if order of the tweets change, in which case I would have gone
       //with a different approach. A better way would probably be just emptying the tweet container
-      //in the render tweets function.
+      //in the render tweets function instead of here.
       $.ajax('/tweets', { method: 'POST', data }).then(() => {
         $.ajax('/tweets').then((arr) => {
           $('#tweets-container').prepend(createTweetElement(arr[arr.length - 1]))
         })
       })
 
-      //Reset textarea and counter after submission
       $(this).find('textarea').val('')
       $(this).find('span').text(140)
     }
