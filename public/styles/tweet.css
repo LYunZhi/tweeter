@@ -5,6 +5,7 @@
   background-color: #f98888;
   color: #fff;
   padding: 5px;
+  display: none;
 }
 
 #compose-button {

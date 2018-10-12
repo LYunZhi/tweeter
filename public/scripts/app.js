@@ -6,7 +6,7 @@ $(() => {
     const currentDate = moment()
     const daysAgo = tweetDate.from(currentDate)
     const image = `<img src="${avatars.small}">`
-// <i class="fas fa-flag"></i>
+
     // DOM structure begins here
     const $tweet = $('<article>').addClass('tweet')
 
@@ -47,9 +47,6 @@ $(() => {
 
     })
   }
-
-  //Initially, error message elements are hidden
-  $('.error-value').hide()
 
   //Initial call to load up existing tweets
   loadTweets()
